@@ -1,0 +1,1091 @@
+{% extends 'navigation_bar.html' %}
+{% load static %}
+
+{% block body %}
+
+<style>
+
+/* =========================
+   DASHBOARD PAGE
+========================= */
+
+.dashboard-page {
+    padding: 30px;
+    background: #f6f8fb;
+    min-height: calc(100vh - 70px);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.dashboard-header {
+    margin-bottom: 25px;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: #9aa3af;
+    margin-bottom: 7px;
+}
+
+.breadcrumb span {
+    color: #16a394;
+}
+
+.dashboard-title {
+    margin: 0;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+    color: #182230;
+}
+
+.dashboard-subtitle {
+    margin: 6px 0 0;
+
+    color: #8b95a5;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stats-row {
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    position: relative;
+
+    background: #ffffff;
+
+    border: 1px solid #e7ebf0;
+
+    border-radius: 11px;
+
+    padding: 20px;
+
+    min-height: 150px;
+
+    box-shadow: 0 4px 18px rgba(20,30,45,0.035);
+
+    transition: 0.2s ease;
+
+    margin-bottom: 20px;
+
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 22px rgba(20,30,45,0.07);
+}
+
+
+/* =========================
+   STAT TOP
+========================= */
+
+.stat-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.stat-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #e7f7f5;
+
+    color: #16a394;
+
+    font-size: 18px;
+}
+
+.stat-arrow {
+    color: #b0b7c3;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   STAT TEXT
+========================= */
+
+.stat-label {
+    color: #8b95a5;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    margin-bottom: 3px;
+}
+
+.stat-number {
+    margin: 0 0 15px;
+
+    color: #1c2735;
+
+    font-size: 27px;
+
+    font-weight: 700;
+}
+
+
+/* =========================
+   STAT BUTTON
+========================= */
+
+.stat-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 11px;
+
+    border: 1px solid #dfe4e9;
+
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #596575 !important;
+
+    text-decoration: none !important;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.stat-btn:hover {
+    border-color: #16a394;
+
+    color: #16a394 !important;
+
+    background: #f5fbfa;
+}
+
+
+/* =========================
+   DASHBOARD CARD
+========================= */
+
+.dashboard-card {
+    background: #ffffff;
+
+    border: 1px solid #e7ebf0;
+
+    border-radius: 11px;
+
+    box-shadow: 0 4px 18px rgba(20,30,45,0.035);
+
+    overflow: hidden;
+
+    margin-bottom: 24px;
+}
+
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.card-header-custom {
+    padding: 18px 22px;
+
+    border-bottom: 1px solid #edf0f3;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.card-header-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+.card-title-icon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 7px;
+
+    background: #e7f7f5;
+
+    color: #16a394;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+}
+
+.card-title-content h3 {
+    margin: 0;
+
+    color: #1b2635;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+.card-title-content p {
+    margin: 3px 0 0;
+
+    color: #929cab;
+
+    font-size: 11px;
+}
+
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-actions {
+    padding: 20px 22px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.quick-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 15px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none !important;
+
+    transition: 0.2s ease;
+}
+
+
+/* ADD DOCTOR */
+
+.quick-doctor {
+    background: #eaf2ff;
+
+    color: #3569b8 !important;
+
+    border: 1px solid #d9e6ff;
+}
+
+.quick-doctor:hover {
+    background: #dce9ff;
+
+    transform: translateY(-1px);
+}
+
+
+/* ADD PATIENT */
+
+.quick-patient {
+    background: #e7f7f5;
+
+    color: #128c80 !important;
+
+    border: 1px solid #d4f0ec;
+}
+
+.quick-patient:hover {
+    background: #d9f2ee;
+
+    transform: translateY(-1px);
+}
+
+
+/* ADD APPOINTMENT */
+
+.quick-appointment {
+    background: #fff5e8;
+
+    color: #c86b18 !important;
+
+    border: 1px solid #ffe9ce;
+}
+
+.quick-appointment:hover {
+    background: #ffedd8;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   APPOINTMENT TABLE
+========================= */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.appointment-table {
+    width: 100%;
+
+    margin: 0;
+
+    border-collapse: collapse;
+}
+
+.appointment-table thead th {
+    background: #fafbfc;
+
+    color: #7c8796;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+    padding: 14px 20px;
+
+    border-top: none;
+
+    border-bottom: 1px solid #e8edf1;
+
+    white-space: nowrap;
+}
+
+.appointment-table tbody td {
+    padding: 15px 20px;
+
+    font-size: 13px;
+
+    color: #536071;
+
+    border-bottom: 1px solid #eef1f4;
+
+    vertical-align: middle;
+}
+
+.appointment-table tbody tr {
+    transition: 0.15s ease;
+}
+
+.appointment-table tbody tr:hover {
+    background: #f9fcfc;
+}
+
+
+/* =========================
+   APPOINTMENT ID
+========================= */
+
+.appointment-id {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 34px;
+
+    height: 27px;
+
+    padding: 0 8px;
+
+    border-radius: 5px;
+
+    background: #eef5ff;
+
+    color: #5572a8;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================
+   DOCTOR / PATIENT
+========================= */
+
+.doctor-info,
+.patient-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.person-avatar {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf8f6;
+
+    color: #16a394;
+
+    font-size: 12px;
+}
+
+.person-name {
+    color: #263147;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+.date-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 6px 9px;
+
+    border-radius: 5px;
+
+    background: #f0f5ff;
+
+    color: #5572a8;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.date-badge i {
+    font-size: 10px;
+}
+
+
+/* =========================
+   TIME
+========================= */
+
+.time-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 6px 9px;
+
+    border-radius: 5px;
+
+    background: #fff5e8;
+
+    color: #c86b18;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.time-badge i {
+    font-size: 10px;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-row {
+    padding: 45px 20px !important;
+
+    text-align: center;
+
+    color: #929cab !important;
+
+    font-size: 13px;
+}
+
+.empty-icon {
+    width: 48px;
+    height: 48px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f5f7;
+
+    color: #a1a9b5;
+
+    font-size: 18px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 991px) {
+
+    .dashboard-page {
+        padding: 25px 20px;
+    }
+
+}
+
+@media(max-width: 767px) {
+
+    .dashboard-page {
+        padding: 20px 15px;
+    }
+
+    .dashboard-title {
+        font-size: 24px;
+    }
+
+    .dashboard-subtitle {
+        font-size: 13px;
+    }
+
+    .card-header-custom {
+        padding: 16px;
+    }
+
+    .quick-actions {
+        padding: 16px;
+    }
+
+    .quick-btn {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .appointment-table {
+        min-width: 700px;
+    }
+
+}
+
+</style>
+
+
+<div class="dashboard-page">
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <div class="breadcrumb">
+
+                Dashboard /
+
+                <span>
+                    Overview
+                </span>
+
+            </div>
+
+            <h1 class="dashboard-title">
+                Admin Dashboard
+            </h1>
+
+            <p class="dashboard-subtitle">
+                Manage doctors, patients and appointments from one place.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         STATISTICS
+    ========================= -->
+
+    <div class="row stats-row">
+
+
+        <!-- DOCTORS -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+
+                        <i class="fas fa-user-doctor"></i>
+
+                    </div>
+
+                    <div class="stat-arrow">
+
+                        <i class="fas fa-arrow-up-right-from-square"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-label">
+                    Total Doctors
+                </div>
+
+                <h2 class="stat-number">
+                    {{ total_doctors }}
+                </h2>
+
+
+                <a href="{% url 'view_doctor' %}"
+                   class="stat-btn">
+
+                    <i class="fas fa-eye"></i>
+
+                    View Doctors
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PATIENTS -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+
+                        <i class="fas fa-hospital-user"></i>
+
+                    </div>
+
+                    <div class="stat-arrow">
+
+                        <i class="fas fa-arrow-up-right-from-square"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-label">
+                    Total Patients
+                </div>
+
+                <h2 class="stat-number">
+                    {{ total_patients }}
+                </h2>
+
+
+                <a href="{% url 'view_patient' %}"
+                   class="stat-btn">
+
+                    <i class="fas fa-eye"></i>
+
+                    View Patients
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- APPOINTMENTS -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+
+                        <i class="fas fa-calendar-check"></i>
+
+                    </div>
+
+                    <div class="stat-arrow">
+
+                        <i class="fas fa-arrow-up-right-from-square"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-label">
+                    Total Appointments
+                </div>
+
+                <h2 class="stat-number">
+                    {{ total_appointments }}
+                </h2>
+
+
+                <a href="{% url 'view_appointment' %}"
+                   class="stat-btn">
+
+                    <i class="fas fa-eye"></i>
+
+                    View Appointments
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         QUICK ACTIONS
+    ========================= -->
+
+    <div class="dashboard-card">
+
+
+        <div class="card-header-custom">
+
+            <div class="card-header-left">
+
+                <div class="card-title-icon">
+
+                    <i class="fas fa-bolt"></i>
+
+                </div>
+
+
+                <div class="card-title-content">
+
+                    <h3>
+                        Quick Actions
+                    </h3>
+
+                    <p>
+                        Quickly add new records to the hospital system.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="quick-actions">
+
+
+            <a href="{% url 'add_doctor' %}"
+               class="quick-btn quick-doctor">
+
+                <i class="fas fa-user-doctor"></i>
+
+                Add Doctor
+
+            </a>
+
+
+            <a href="{% url 'add_patient' %}"
+               class="quick-btn quick-patient">
+
+                <i class="fas fa-user-plus"></i>
+
+                Add Patient
+
+            </a>
+
+
+            <a href="{% url 'add_appointment' %}"
+               class="quick-btn quick-appointment">
+
+                <i class="fas fa-calendar-plus"></i>
+
+                Add Appointment
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         RECENT APPOINTMENTS
+    ========================= -->
+
+    <div class="dashboard-card">
+
+
+        <div class="card-header-custom">
+
+            <div class="card-header-left">
+
+                <div class="card-title-icon">
+
+                    <i class="fas fa-calendar-check"></i>
+
+                </div>
+
+
+                <div class="card-title-content">
+
+                    <h3>
+                        Recent Appointments
+                    </h3>
+
+                    <p>
+                        Latest appointments registered in the system.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a href="{% url 'view_appointment' %}"
+               class="stat-btn">
+
+                View All
+
+                <i class="fas fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table class="appointment-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Doctor</th>
+
+                        <th>Patient</th>
+
+                        <th>Date</th>
+
+                        <th>Time</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for i in recent_appointments %}
+
+                    <tr>
+
+
+                        <!-- ID -->
+
+                        <td>
+
+                            <span class="appointment-id">
+
+                                #{{ i.id }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- DOCTOR -->
+
+                        <td>
+
+                            <div class="doctor-info">
+
+                                <div class="person-avatar">
+
+                                    <i class="fas fa-user-doctor"></i>
+
+                                </div>
+
+
+                                <span class="person-name">
+
+                                    {{ i.doctor.name }}
+
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- PATIENT -->
+
+                        <td>
+
+                            <div class="patient-info">
+
+                                <div class="person-avatar">
+
+                                    <i class="fas fa-user"></i>
+
+                                </div>
+
+
+                                <span class="person-name">
+
+                                    {{ i.patient.name }}
+
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- DATE -->
+
+                        <td>
+
+                            <span class="date-badge">
+
+                                <i class="fas fa-calendar"></i>
+
+                                {{ i.date1 }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- TIME -->
+
+                        <td>
+
+                            <span class="time-badge">
+
+                                <i class="fas fa-clock"></i>
+
+                                {{ i.time1 }}
+
+                            </span>
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="5"
+                            class="empty-row">
+
+
+                            <div class="empty-icon">
+
+                                <i class="fas fa-calendar-xmark"></i>
+
+                            </div>
+
+
+                            No appointments found.
+
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

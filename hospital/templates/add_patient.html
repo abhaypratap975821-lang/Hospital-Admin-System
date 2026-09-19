@@ -1,0 +1,1131 @@
+{% extends 'navigation_bar.html' %}
+{% load static %}
+
+{% block body %}
+
+<style>
+
+/* =========================
+   PAGE
+========================= */
+
+.patient-page {
+    padding: 30px;
+    background: #f6f8fb;
+    min-height: calc(100vh - 70px);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: #9aa3af;
+    margin-bottom: 7px;
+}
+
+.breadcrumb span {
+    color: #16a394;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 700;
+    color: #182230;
+}
+
+.page-subtitle {
+    margin: 6px 0 0;
+    color: #8b95a5;
+    font-size: 14px;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #ffffff;
+    color: #596575 !important;
+
+    padding: 10px 16px;
+
+    border: 1px solid #dfe4e9;
+    border-radius: 7px;
+
+    text-decoration: none !important;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #f5f7f9;
+    color: #16a394 !important;
+}
+
+
+/* =========================
+   FORM CARD
+========================= */
+
+.patient-card {
+    background: #ffffff;
+
+    border: 1px solid #e7ebf0;
+
+    border-radius: 11px;
+
+    box-shadow: 0 4px 18px rgba(20,30,45,0.035);
+
+    overflow: hidden;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.card-header-custom {
+    padding: 18px 22px;
+
+    border-bottom: 1px solid #edf0f3;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.card-title-icon {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 7px;
+
+    background: #e7f7f5;
+
+    color: #16a394;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+}
+
+.card-title-content h3 {
+    margin: 0;
+
+    color: #1b2635;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+.card-title-content p {
+    margin: 3px 0 0;
+
+    color: #929cab;
+
+    font-size: 11px;
+}
+
+
+/* =========================
+   FORM BODY
+========================= */
+
+.form-body {
+    padding: 25px 22px 28px;
+}
+
+
+/* =========================
+   FORM GROUP
+========================= */
+
+.form-group-custom {
+    margin-bottom: 20px;
+}
+
+.form-label-custom {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #465365;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+.form-control-custom {
+    width: 100%;
+
+    height: 43px;
+
+    padding: 10px 13px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe4e9;
+
+    border-radius: 6px;
+
+    color: #273142;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.form-control-custom::placeholder {
+    color: #b0b7c3;
+}
+
+.form-control-custom:focus {
+    border-color: #16a394;
+
+    box-shadow: 0 0 0 3px rgba(22,163,148,0.08);
+}
+
+
+/* =========================
+   TEXTAREA
+========================= */
+
+textarea.form-control-custom {
+    height: 100px;
+    resize: vertical;
+}
+
+
+/* =========================
+   INPUT ICON
+========================= */
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper i {
+    position: absolute;
+
+    left: 13px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #9aa3af;
+
+    font-size: 13px;
+
+    pointer-events: none;
+}
+
+.input-wrapper .form-control-custom {
+    padding-left: 38px;
+}
+
+
+/* =========================
+   TEXTAREA ICON
+========================= */
+
+.textarea-wrapper {
+    position: relative;
+}
+
+.textarea-wrapper i {
+    position: absolute;
+
+    left: 13px;
+    top: 14px;
+
+    color: #9aa3af;
+
+    font-size: 13px;
+
+    pointer-events: none;
+}
+
+.textarea-wrapper .form-control-custom {
+    padding-left: 38px;
+}
+
+
+/* =========================
+   GENDER
+========================= */
+
+.gender-options {
+    display: flex;
+    gap: 12px;
+}
+
+.gender-option {
+    position: relative;
+
+    flex: 1;
+
+    cursor: pointer;
+}
+
+.gender-option input {
+    position: absolute;
+
+    opacity: 0;
+}
+
+.gender-box {
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe4e9;
+
+    border-radius: 6px;
+
+    color: #596575;
+
+    font-size: 13px;
+
+    transition: 0.2s ease;
+}
+
+.gender-box i {
+    color: #9aa3af;
+    font-size: 13px;
+}
+
+.gender-option input:checked + .gender-box {
+    border-color: #16a394;
+
+    background: #eefaf8;
+
+    color: #128c80;
+}
+
+.gender-option input:checked + .gender-box i {
+    color: #16a394;
+}
+
+
+/* =========================
+   REQUIRED
+========================= */
+
+.required {
+    color: #dc5c67;
+}
+
+
+/* =========================
+   FORM FOOTER
+========================= */
+
+.form-footer {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    border-top: 1px solid #edf0f3;
+
+    margin-top: 5px;
+
+    padding-top: 20px;
+}
+
+
+/* =========================
+   CANCEL BUTTON
+========================= */
+
+.cancel-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 10px 20px;
+
+    background: #ffffff;
+
+    color: #596575 !important;
+
+    border: 1px solid #dfe4e9;
+
+    border-radius: 7px;
+
+    text-decoration: none !important;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.cancel-btn:hover {
+    background: #f5f7f9;
+
+    color: #16a394 !important;
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.submit-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px 22px;
+
+    background: #16a394;
+
+    color: #ffffff;
+
+    border: none;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: #128c80;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   SUCCESS POPUP
+========================= */
+
+.success-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(24,34,48,0.35);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 99999;
+
+    padding: 20px;
+}
+
+.success-card {
+    width: 400px;
+
+    max-width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e7ebf0;
+
+    border-radius: 11px;
+
+    box-shadow: 0 8px 30px rgba(20,30,45,0.12);
+
+    padding: 30px;
+
+    text-align: center;
+
+    animation: successPopup 0.25s ease;
+}
+
+.success-icon {
+    width: 52px;
+    height: 52px;
+
+    margin: 0 auto 17px;
+
+    border-radius: 8px;
+
+    background: #e7f7f5;
+
+    color: #16a394;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.success-title {
+    margin: 0;
+
+    color: #182230;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+.success-message {
+    margin: 8px 0 22px;
+
+    color: #8b95a5;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.success-btn {
+    width: 100%;
+
+    border: none;
+
+    background: #16a394;
+
+    color: #ffffff;
+
+    padding: 10px 18px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.success-btn:hover {
+    background: #128c80;
+}
+
+
+/* =========================
+   ERROR POPUP
+========================= */
+
+.error-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(24,34,48,0.35);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 99999;
+
+    padding: 20px;
+}
+
+.error-card {
+    width: 400px;
+
+    max-width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e7ebf0;
+
+    border-radius: 11px;
+
+    box-shadow: 0 8px 30px rgba(20,30,45,0.12);
+
+    padding: 30px;
+
+    text-align: center;
+
+    animation: errorPopup 0.25s ease;
+}
+
+.error-icon {
+    width: 52px;
+    height: 52px;
+
+    margin: 0 auto 17px;
+
+    border-radius: 8px;
+
+    background: #fff1f2;
+
+    color: #dc5c67;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.error-title {
+    margin: 0;
+
+    color: #182230;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+.error-message {
+    margin: 8px 0 22px;
+
+    color: #8b95a5;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.error-close {
+    width: 100%;
+
+    border: none;
+
+    background: #16a394;
+
+    color: #ffffff;
+
+    padding: 10px 18px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.error-close:hover {
+    background: #128c80;
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes successPopup {
+
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes errorPopup {
+
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 768px) {
+
+    .patient-page {
+        padding: 20px 15px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .back-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .patient-card {
+        width: 100%;
+    }
+
+    .form-body {
+        padding: 20px 15px;
+    }
+
+    .gender-options {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-footer {
+        flex-direction: column-reverse;
+    }
+
+    .submit-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+
+<div class="patient-page">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="breadcrumb">
+
+                Dashboard /
+
+                <span>
+                    Add Patient
+                </span>
+
+            </div>
+
+            <h1 class="page-title">
+                Add Patient
+            </h1>
+
+            <p class="page-subtitle">
+                Add a new patient to the hospital management system.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'view_patient' %}"
+           class="back-btn">
+
+            <i class="fas fa-arrow-left"></i>
+
+            Back to Patients
+
+        </a>
+
+    </div>
+
+
+    <!-- FORM CARD -->
+
+    <div class="patient-card">
+
+
+        <div class="card-header-custom">
+
+            <div class="card-title-icon">
+
+                <i class="fas fa-hospital-user"></i>
+
+            </div>
+
+
+            <div class="card-title-content">
+
+                <h3>
+                    Patient Information
+                </h3>
+
+                <p>
+                    Enter the personal details of the patient
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-body">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <!-- PATIENT NAME -->
+
+                <div class="form-group-custom">
+
+                    <label for="name"
+                           class="form-label-custom">
+
+                        Patient Name
+
+                        <span class="required">
+                            *
+                        </span>
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i class="fas fa-user"></i>
+
+                        <input type="text"
+                               id="name"
+                               class="form-control-custom"
+                               name="name"
+                               placeholder="Enter patient name"
+                               required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- GENDER -->
+
+                <div class="form-group-custom">
+
+                    <label class="form-label-custom">
+
+                        Gender
+
+                        <span class="required">
+                            *
+                        </span>
+
+                    </label>
+
+
+                    <div class="gender-options">
+
+
+                        <label class="gender-option">
+
+                            <input type="radio"
+                                   name="gender"
+                                   value="Male"
+                                   required>
+
+                            <div class="gender-box">
+
+                                <i class="fas fa-mars"></i>
+
+                                Male
+
+                            </div>
+
+                        </label>
+
+
+                        <label class="gender-option">
+
+                            <input type="radio"
+                                   name="gender"
+                                   value="Female">
+
+                            <div class="gender-box">
+
+                                <i class="fas fa-venus"></i>
+
+                                Female
+
+                            </div>
+
+                        </label>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTACT -->
+
+                <div class="form-group-custom">
+
+                    <label for="contact"
+                           class="form-label-custom">
+
+                        Contact
+
+                        <span class="required">
+                            *
+                        </span>
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i class="fas fa-phone"></i>
+
+                        <input type="text"
+                               id="contact"
+                               class="form-control-custom"
+                               name="mobile"
+                               maxlength="15"
+                               placeholder="Enter contact number"
+                               required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="form-group-custom">
+
+                    <label for="address"
+                           class="form-label-custom">
+
+                        Address
+
+                        <span class="required">
+                            *
+                        </span>
+
+                    </label>
+
+
+                    <div class="textarea-wrapper">
+
+                        <i class="fas fa-location-dot"></i>
+
+                        <textarea id="address"
+                                  class="form-control-custom"
+                                  name="address"
+                                  rows="4"
+                                  placeholder="Enter patient's address"
+                                  required></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORM FOOTER -->
+
+                <div class="form-footer">
+
+                    <a href="{% url 'view_patient' %}"
+                       class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="submit-btn">
+
+                        <i class="fas fa-user-plus"></i>
+
+                        Add Patient
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SUCCESS POPUP
+========================= -->
+
+{% if error == "no" %}
+
+<div class="success-overlay"
+     id="successPopup">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+
+            <i class="fas fa-check"></i>
+
+        </div>
+
+
+        <h3 class="success-title">
+            Patient Added Successfully
+        </h3>
+
+
+        <p class="success-message">
+            The patient has been added to the hospital records.
+        </p>
+
+
+        <button type="button"
+                class="success-btn"
+                onclick="goToPatients()">
+
+            View Patients
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function goToPatients() {
+
+    window.location.href = "{% url 'view_patient' %}";
+
+}
+
+</script>
+
+{% endif %}
+
+
+<!-- =========================
+     ERROR POPUP
+========================= -->
+
+{% if error == "yes" %}
+
+<div class="error-overlay"
+     id="errorPopup">
+
+    <div class="error-card">
+
+        <div class="error-icon">
+
+            <i class="fas fa-circle-exclamation"></i>
+
+        </div>
+
+
+        <h3 class="error-title">
+            Something went wrong
+        </h3>
+
+
+        <p class="error-message">
+            We couldn't add the patient.
+            Please check the information and try again.
+        </p>
+
+
+        <button type="button"
+                class="error-close"
+                onclick="closeErrorPopup()">
+
+            Try Again
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function closeErrorPopup() {
+
+    document.getElementById("errorPopup").style.display = "none";
+
+}
+
+</script>
+
+{% endif %}
+
+
+{% endblock %}

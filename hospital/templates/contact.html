@@ -1,0 +1,340 @@
+{% extends 'navigation_bar.html' %}
+{% load static %}
+
+{% block body %}
+
+<style>
+
+    /* ================= CONTACT PAGE ================= */
+
+    .contact-page {
+        background: #f6f8fb;
+        min-height: calc(100vh - 72px);
+        padding: 35px 30px 50px;
+    }
+
+    /* ---------- Page Header ---------- */
+
+    .contact-header {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb-text {
+        font-size: 13px;
+        color: #9ca3af;
+        margin-bottom: 8px;
+    }
+
+    .breadcrumb-text i {
+        color: #16a394;
+        margin-right: 6px;
+    }
+
+    .contact-header h2 {
+        margin: 0;
+        color: #111827;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .contact-header p {
+        margin: 7px 0 0;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+
+    /* ---------- Contact Cards ---------- */
+
+    .contact-card {
+        height: 100%;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 26px 20px;
+        text-align: center;
+        transition: all 0.25s ease;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-4px);
+        border-color: #ccece8;
+        box-shadow: 0 8px 25px rgba(17, 24, 39, 0.08);
+    }
+
+
+    /* ---------- Icon ---------- */
+
+    .contact-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 17px;
+        border-radius: 10px;
+        background: #e6f7f5;
+        color: #16a394;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+    }
+
+
+    /* ---------- Card Heading ---------- */
+
+    .contact-card h4 {
+        margin: 0 0 10px;
+        color: #111827;
+        font-size: 16px;
+        font-weight: 650;
+    }
+
+
+    /* ---------- Card Text ---------- */
+
+    .contact-card p {
+        margin: 0;
+        color: #6b7280;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+
+    /* ---------- Links ---------- */
+
+    .contact-card a {
+        color: #4b5563;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        word-break: break-word;
+    }
+
+    .contact-card a:hover {
+        color: #16a394;
+        text-decoration: none;
+    }
+
+
+    /* ---------- Special Link ---------- */
+
+    .contact-link {
+        color: #16a394 !important;
+        font-weight: 500;
+    }
+
+
+    /* ---------- Bottom Info ---------- */
+
+    .contact-info {
+        margin-top: 30px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .contact-info-content h5 {
+        margin: 0 0 5px;
+        color: #111827;
+        font-size: 16px;
+        font-weight: 650;
+    }
+
+    .contact-info-content p {
+        margin: 0;
+        color: #6b7280;
+        font-size: 13px;
+    }
+
+    .contact-info-icon {
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+        border-radius: 8px;
+        background: #e6f7f5;
+        color: #16a394;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 767px) {
+
+        .contact-page {
+            padding: 25px 15px 40px;
+        }
+
+        .contact-header h2 {
+            font-size: 24px;
+        }
+
+        .contact-card {
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            padding: 20px;
+        }
+    }
+
+</style>
+
+
+<!-- ================= CONTACT PAGE ================= -->
+
+<div class="contact-page">
+
+    <div class="container-fluid">
+
+        <!-- Header -->
+
+        <div class="contact-header">
+
+            <div class="breadcrumb-text">
+                <i class="fa-solid fa-house"></i>
+                Home / Contact
+            </div>
+
+            <h2>Contact Us</h2>
+
+            <p>
+                Get in touch with us for support, information or assistance.
+            </p>
+
+        </div>
+
+
+        <!-- Contact Cards -->
+
+        <div class="row">
+
+            <!-- Phone -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+
+                    <h4>Contact</h4>
+
+                    <p>
+                        <a href="tel:+919758415857" class="contact-link">
+                            +91 9758415857
+                        </a>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <h4>Send Email</h4>
+
+                    <p>
+                        <a href="mailto:abhaypratap975821@gamil.com"
+                           class="contact-link">
+                            abhaypratap975821@gamil.com
+                        </a>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Address -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <h4>Office Address</h4>
+
+                    <p>
+                        <a
+                            class="contact-link"
+                            href="https://www.google.com/maps/search/?api=1&query=Gautam+Buddha+Nagar+District%2C+Uttar+Pradesh%2C+India"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            Gautam Buddha Nagar (Noida)
+                        </a>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Office Hours -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <h4>Office Hours</h4>
+
+                    <p>
+                        9:00 AM To 7:00 PM
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bottom Information -->
+
+        <div class="contact-info">
+
+            <div class="contact-info-icon">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+
+            <div class="contact-info-content">
+
+                <h5>Need Assistance?</h5>
+
+                <p>
+                    Our team is available during office hours to help you
+                    with your queries and support requirements.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

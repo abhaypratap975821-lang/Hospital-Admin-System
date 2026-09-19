@@ -1,0 +1,534 @@
+/* =========================================================
+   MEDICARE HOSPITAL MANAGEMENT SYSTEM
+   Professional Admin Theme
+   ========================================================= */
+
+
+/* ---------- General Page ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f6f8fb;
+    font-family: Arial, sans-serif;
+    color: #374151;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   NAVBAR / TOPBAR
+   ========================================================= */
+
+.navbar {
+    background: #ffffff !important;
+    padding: 0 30px;
+    min-height: 72px;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(17, 24, 39, 0.04);
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827 !important;
+}
+
+.nav-link {
+    color: #4b5563 !important;
+    font-size: 14px;
+    margin-left: 8px;
+    padding: 8px 12px !important;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: #f0faf9;
+    color: #16a394 !important;
+    transform: none;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.container {
+    margin-top: 35px;
+}
+
+.container-fluid {
+    width: 100%;
+}
+
+
+/* =========================================================
+   COMMON PAGE HEADING
+   ========================================================= */
+
+.page-title {
+    color: #111827;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.page-subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   COMMON CARD
+   ========================================================= */
+
+.card,
+.custom-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(17, 24, 39, 0.04);
+}
+
+
+/* =========================================================
+   CONTACT PAGE
+   ========================================================= */
+
+.contact-container {
+    background-color: #ffffff;
+    padding: 35px 30px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(17, 24, 39, 0.04);
+}
+
+.contact-container h2 {
+    color: #111827;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.contact-container .row {
+    margin-top: 30px;
+}
+
+.contact-container .col-lg-3 {
+    padding: 25px 15px;
+    border-radius: 9px;
+    transition: all 0.25s ease;
+}
+
+.contact-container .col-lg-3:hover {
+    background-color: #f8fcfb;
+    transform: translateY(-3px);
+}
+
+.contact-container h4 {
+    color: #111827;
+    font-size: 16px;
+    font-weight: 650;
+    margin-bottom: 12px;
+}
+
+.contact-container h4 i {
+    color: #16a394;
+    font-size: 19px;
+    margin-right: 7px;
+}
+
+.contact-container p {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+.contact-container p a {
+    color: #16a394 !important;
+    text-decoration: none;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.contact-container p a:hover {
+    color: #128f83 !important;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   DOCTOR TABLE
+   ========================================================= */
+
+.doctor-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(17, 24, 39, 0.04);
+}
+
+.doctor-container h2 {
+    color: #111827;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+.doctor-container table {
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 15px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.doctor-container th {
+    background-color: #f8fafc;
+    color: #4b5563;
+    text-align: left;
+    padding: 14px 12px;
+    font-size: 12px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.doctor-container td {
+    text-align: left;
+    padding: 14px 12px;
+    vertical-align: middle;
+    color: #4b5563;
+    font-size: 13px;
+    border-bottom: 1px solid #f0f1f3;
+}
+
+.doctor-container tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.doctor-container tbody tr:hover {
+    background-color: #f9fcfc;
+}
+
+
+/* =========================================================
+   GENERAL TABLE
+   ========================================================= */
+
+table {
+    width: 100%;
+}
+
+table th {
+    font-weight: 600;
+}
+
+table td {
+    vertical-align: middle;
+}
+
+
+/* Keep numeric/text table values aligned from left */
+
+#example th,
+#example td {
+    text-align: left !important;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn-primary {
+    background-color: #16a394 !important;
+    border-color: #16a394 !important;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #128f83 !important;
+    border-color: #128f83 !important;
+    box-shadow: 0 5px 14px rgba(22, 163, 148, 0.18);
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    border-radius: 6px;
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b !important;
+    border-color: #bb2d3b !important;
+}
+
+
+/* =========================================================
+   FORM CONTROLS
+   ========================================================= */
+
+.form-control {
+    border: 1px solid #d9dee7;
+    border-radius: 7px;
+    color: #374151;
+    font-size: 14px;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: #16a394;
+    box-shadow: 0 0 0 3px rgba(22, 163, 148, 0.10);
+}
+
+label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   DATATABLE
+   ========================================================= */
+
+#example {
+    width: 100% !important;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#example thead th {
+    background-color: #f8fafc;
+    color: #4b5563;
+    font-size: 12px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 14px 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#example tbody td {
+    color: #4b5563;
+    font-size: 13px;
+    padding: 14px 12px;
+    border-bottom: 1px solid #f0f1f3;
+}
+
+#example tbody tr:hover {
+    background-color: #f9fcfc;
+}
+
+
+/* ---------- DataTable Search ---------- */
+
+.dt-container .dt-search input {
+    height: 36px;
+    width: 220px;
+    border: 1px solid #d9dee7;
+    border-radius: 6px;
+    padding: 0 11px;
+    outline: none;
+}
+
+.dt-container .dt-search input:focus {
+    border-color: #16a394;
+    box-shadow: 0 0 0 3px rgba(22, 163, 148, 0.08);
+}
+
+
+/* ---------- DataTable Export Buttons ---------- */
+
+.dt-buttons {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.dt-button {
+    background: #ffffff !important;
+    border: 1px solid #d9dee7 !important;
+    color: #4b5563 !important;
+    border-radius: 5px !important;
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    box-shadow: none !important;
+}
+
+.dt-button:hover {
+    background: #f0faf9 !important;
+    border-color: #bfe5e0 !important;
+    color: #16a394 !important;
+}
+
+
+/* ---------- DataTable Pagination ---------- */
+
+.dt-paging-button {
+    border-radius: 5px !important;
+    font-size: 12px !important;
+}
+
+.dt-paging-button.current {
+    background: #16a394 !important;
+    border-color: #16a394 !important;
+    color: #ffffff !important;
+}
+
+
+/* ---------- DataTable Info ---------- */
+
+.dt-info {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.badge-success {
+    background-color: #e6f7f5 !important;
+    color: #128f83 !important;
+}
+
+.badge-danger {
+    background-color: #fff1f2 !important;
+    color: #dc3545 !important;
+}
+
+.badge-primary {
+    background-color: #eef5ff !important;
+    color: #3b6ea8 !important;
+}
+
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+.alert {
+    border-radius: 7px;
+    border: 1px solid transparent;
+    font-size: 13px;
+}
+
+.alert-success {
+    background-color: #eaf8f5;
+    color: #147d70;
+    border-color: #ccece8;
+}
+
+.alert-danger {
+    background-color: #fff1f2;
+    color: #b42333;
+    border-color: #ffd5da;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f3f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .nav-link {
+        margin-left: 0;
+    }
+
+    .container {
+        margin-top: 25px;
+    }
+
+    .contact-container {
+        padding: 25px 15px;
+    }
+
+    .contact-container .col-lg-3 {
+        margin-bottom: 15px;
+    }
+
+    .doctor-container {
+        padding: 15px;
+        overflow-x: auto;
+    }
+
+    .doctor-container table {
+        min-width: 650px;
+    }
+
+    .dt-container .dt-search input {
+        width: 170px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .page-title {
+        font-size: 23px;
+    }
+
+    .contact-container h2,
+    .doctor-container h2 {
+        font-size: 23px;
+    }
+
+    .dt-buttons {
+        margin-bottom: 10px;
+    }
+
+}

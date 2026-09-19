@@ -1,0 +1,820 @@
+
+{% extends 'navigation_bar.html' %}
+{% load static %}
+
+{% block body %}
+
+<style>
+
+/* =========================
+   PAGE
+========================= */
+
+.doctor-page {
+    padding: 30px;
+    background: #f6f8fb;
+    min-height: calc(100vh - 70px);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: #9aa3af;
+    margin-bottom: 7px;
+}
+
+.breadcrumb span {
+    color: #16a394;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 700;
+    color: #182230;
+}
+
+.page-subtitle {
+    margin: 6px 0 0;
+    color: #8b95a5;
+    font-size: 14px;
+}
+
+
+/* =========================
+   ADD BUTTON
+========================= */
+
+.add-doctor-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #16a394;
+    color: #fff !important;
+    padding: 11px 18px;
+    border-radius: 7px;
+    text-decoration: none !important;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.add-doctor-btn:hover {
+    background: #128c80;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   TOTAL DOCTORS
+========================= */
+
+.stats-row {
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    width: 260px;
+    background: #ffffff;
+    border: 1px solid #e8edf2;
+    border-radius: 10px;
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.03);
+}
+
+.stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e7f7f5;
+    color: #16a394;
+    font-size: 19px;
+}
+
+.stat-info small {
+    display: block;
+    color: #8d97a6;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.stat-info strong {
+    color: #1c2735;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   TABLE CARD
+========================= */
+
+.doctor-card {
+    background: #ffffff;
+    border: 1px solid #e7ebf0;
+    border-radius: 11px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(20,30,45,0.035);
+}
+
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.card-header-custom {
+    padding: 18px 22px;
+    border-bottom: 1px solid #edf0f3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1b2635;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.card-title-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 7px;
+    background: #e7f7f5;
+    color: #16a394;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.doctor-count {
+    color: #929cab;
+    font-size: 12px;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrapper {
+    padding: 0;
+}
+
+#example {
+    width: 100% !important;
+    margin: 0 !important;
+    border-collapse: collapse !important;
+}
+
+#example thead th {
+    background: #fafbfc;
+    color: #7c8796;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 15px 20px;
+    border-top: none;
+    border-bottom: 1px solid #e8edf1;
+}
+
+#example tbody td {
+    padding: 16px 20px;
+    font-size: 13px;
+    color: #536071;
+    border-bottom: 1px solid #eef1f4;
+    vertical-align: middle;
+}
+
+#example tbody tr {
+    transition: 0.15s ease;
+}
+
+#example tbody tr:hover {
+    background: #f9fcfc;
+}
+
+
+/* =========================
+   DOCTOR NAME
+========================= */
+
+.doctor-profile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.doctor-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #eaf8f6;
+    color: #16a394;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.doctor-name {
+    color: #202b3a;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+
+/* =========================
+   ID
+========================= */
+
+.doctor-id {
+    color: #465365;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.contact-info i {
+    color: #16a394;
+    font-size: 12px;
+}
+
+
+/* =========================
+   SPECIALIZATION
+========================= */
+
+.speciality-badge {
+    display: inline-block;
+    padding: 6px 11px;
+    background: #f0f5ff;
+    color: #5572a8;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+.delete-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: #fff1f2;
+    color: #dc5c67 !important;
+    text-decoration: none !important;
+    transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #dc5c67;
+    color: white !important;
+}
+
+
+/* =========================
+   DATATABLE
+========================= */
+
+.dataTables_wrapper {
+    padding: 18px 20px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.dataTables_filter {
+    display: block !important;
+    float: right;
+    margin-bottom: 12px;
+}
+
+.dataTables_filter label {
+    color: #8993a2;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.dataTables_filter input {
+    width: 220px;
+    height: 34px;
+
+    margin-left: 8px;
+
+    padding: 6px 10px;
+
+    border: 1px solid #dfe4e9;
+    border-radius: 6px;
+
+    outline: none;
+
+    font-size: 12px;
+    color: #465365;
+
+    background: #ffffff;
+}
+
+.dataTables_filter input:focus {
+    border-color: #16a394;
+    box-shadow: 0 0 0 2px rgba(22,163,148,0.08);
+}
+
+
+/* =========================
+   LENGTH / ENTRIES
+========================= */
+
+.dataTables_length {
+    display: none !important;
+}
+
+
+/* =========================
+   INFORMATION
+========================= */
+
+.dataTables_info {
+    color: #8993a2 !important;
+    font-size: 12px;
+    padding-top: 15px !important;
+}
+
+
+/* =========================
+   PAGINATION
+========================= */
+
+.dataTables_paginate {
+    margin-top: 10px !important;
+}
+
+.dataTables_wrapper .paginate_button {
+    border: none !important;
+    border-radius: 5px !important;
+    font-size: 12px !important;
+    color: #697586 !important;
+}
+
+.dataTables_wrapper .paginate_button:hover {
+    background: #eef8f7 !important;
+    color: #16a394 !important;
+    border: none !important;
+}
+
+.dataTables_wrapper .paginate_button.current {
+    background: #16a394 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+
+/* =========================
+   EXPORT BUTTONS
+========================= */
+
+.dt-buttons {
+    margin-bottom: 12px;
+}
+
+.dt-button {
+    background: #ffffff !important;
+    border: 1px solid #dfe4e9 !important;
+    color: #596575 !important;
+    border-radius: 5px !important;
+    font-size: 11px !important;
+    padding: 6px 10px !important;
+    box-shadow: none !important;
+}
+
+.dt-button:hover {
+    background: #f5f7f9 !important;
+    color: #16a394 !important;
+}
+
+
+/* =========================
+   TOP CONTROLS
+========================= */
+
+.dataTables_wrapper .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.dataTables_wrapper .top::after {
+    display: none;
+}
+
+
+/* =========================
+   CLEAR
+========================= */
+
+.clear {
+    clear: both;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 768px) {
+
+    .doctor-page {
+        padding: 20px 15px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .add-doctor-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .stat-card {
+        width: 100%;
+    }
+
+    .doctor-card {
+        overflow-x: auto;
+    }
+
+    #example {
+        min-width: 800px;
+    }
+
+    .dataTables_wrapper .top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .dataTables_filter {
+        float: none;
+        width: 100%;
+    }
+
+    .dataTables_filter input {
+        width: 100%;
+        max-width: 250px;
+    }
+
+}
+
+</style>
+
+
+<div class="doctor-page">
+
+
+    <!-- =========================
+         PAGE HEADER
+    ========================= -->
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="breadcrumb">
+                Dashboard / <span>Doctors</span>
+            </div>
+
+            <h1 class="page-title">
+                Doctor Management
+            </h1>
+
+            <p class="page-subtitle">
+                Manage hospital doctors and their professional information.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'add_doctor' %}"
+           class="add-doctor-btn">
+
+            <i class="fas fa-plus"></i>
+
+            Add Doctor
+
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         TOTAL DOCTORS
+    ========================= -->
+
+    <div class="stats-row">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fas fa-user-doctor"></i>
+
+            </div>
+
+            <div class="stat-info">
+
+                <small>Total Doctors</small>
+
+                <strong>{{ doc|length }}</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         DOCTOR TABLE
+    ========================= -->
+
+    <div class="doctor-card">
+
+
+        <div class="card-header-custom">
+
+            <h3 class="card-title">
+
+                <span class="card-title-icon">
+
+                    <i class="fas fa-user-doctor"></i>
+
+                </span>
+
+                Hospital Doctors
+
+            </h3>
+
+
+            <span class="doctor-count">
+
+                {{ doc|length }} Doctor(s)
+
+            </span>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table id="example" class="table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Doctor</th>
+
+                        <th>ID</th>
+
+                        <th>Contact</th>
+
+                        <th>Specialization</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for i in doc %}
+
+                    <tr>
+
+
+                        <!-- DOCTOR -->
+
+                        <td>
+
+                            <div class="doctor-profile">
+
+                                <div class="doctor-avatar">
+
+                                    <i class="fas fa-user-doctor"></i>
+
+                                </div>
+
+                                <div class="doctor-name">
+
+                                    {{ i.name }}
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- ID -->
+
+                        <td>
+
+                            <span class="doctor-id">
+
+                                {{ i.id }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- CONTACT -->
+
+                        <td>
+
+                            <div class="contact-info">
+
+                                <i class="fas fa-phone"></i>
+
+                                {{ i.phone }}
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- SPECIALIZATION -->
+
+                        <td>
+
+                            <span class="speciality-badge">
+
+                                {{ i.speciality }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- DELETE -->
+
+                        <td>
+
+                            <a href="{% url 'delete_doctor' i.id %}"
+                               onclick="return confirm('Are you really sure you want to delete this doctor?');"
+                               class="delete-btn"
+                               title="Delete Doctor">
+
+                                <i class="fas fa-trash"></i>
+
+                            </a>
+
+                        </td>
+
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     DATATABLE SCRIPT
+========================= -->
+
+<script>
+
+$(document).ready(function () {
+
+    $('#example').DataTable({
+
+        /*
+         * B = Buttons
+         * f = Search
+         * r = Processing
+         * t = Table
+         * i = Information
+         * p = Pagination
+         */
+
+        dom: '<"top"Bf>rt<"bottom"ip><"clear">',
+
+
+        buttons: [
+
+            {
+                extend: 'copyHtml5',
+
+                text: '<i class="fas fa-copy"></i> Copy'
+            },
+
+            {
+                extend: 'excelHtml5',
+
+                text: '<i class="fas fa-file-excel"></i> Excel'
+            },
+
+            {
+                extend: 'csvHtml5',
+
+                text: '<i class="fas fa-file-csv"></i> CSV'
+            },
+
+            {
+                extend: 'pdfHtml5',
+
+                text: '<i class="fas fa-file-pdf"></i> PDF'
+            }
+
+        ],
+
+
+        /* 10 rows per page */
+
+        pageLength: 10,
+
+
+        /* Sorting enabled */
+
+        ordering: true,
+
+
+        /* SEARCH ENABLED */
+
+        searching: true,
+
+
+        /* Entries dropdown hidden */
+
+        lengthChange: false,
+
+
+        /* Responsive disabled */
+
+        responsive: false
+
+    });
+
+});
+
+</script>
+
+
+{% endblock %}
+```
+

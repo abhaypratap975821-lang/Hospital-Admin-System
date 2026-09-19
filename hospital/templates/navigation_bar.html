@@ -1,0 +1,875 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Hospital Management System</title>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+
+    <!-- =========================
+         BOOTSTRAP
+    ========================== -->
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+    <!-- =========================
+         FONT AWESOME
+    ========================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- =========================
+         JQUERY
+    ========================== -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <!-- =========================
+         BOOTSTRAP JS
+    ========================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <!-- =========================
+         DATATABLES
+    ========================== -->
+
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/2.3.3/css/dataTables.dataTables.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/buttons/3.2.5/css/buttons.dataTables.min.css">
+
+
+    <script src="https://cdn.datatables.net/2.3.3/js/dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/3.2.5/js/dataTables.buttons.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/3.2.5/js/buttons.dataTables.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/3.2.5/js/buttons.html5.min.js"></script>
+
+
+<style>
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    background: #f6f8fb;
+
+    font-family: Arial, sans-serif;
+
+    color: #273142;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.hospital-sidebar {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 245px;
+    height: 100vh;
+
+    background: #111827;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+
+    transition: 0.3s ease;
+
+    scrollbar-width: thin;
+
+    scrollbar-color: #293548 #111827;
+}
+
+
+/* =====================================================
+   SIDEBAR SCROLLBAR
+===================================================== */
+
+.hospital-sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.hospital-sidebar::-webkit-scrollbar-track {
+    background: #111827;
+}
+
+.hospital-sidebar::-webkit-scrollbar-thumb {
+    background: #293548;
+    border-radius: 10px;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.hospital-logo {
+
+    height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 22px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.logo-icon {
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 9px;
+
+    background: #14b8a6;
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-right: 10px;
+
+    font-size: 17px;
+
+    flex-shrink: 0;
+}
+
+.logo-text {
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 18px;
+}
+
+.logo-text small {
+
+    display: block;
+
+    color: #8d99aa;
+
+    font-size: 9px;
+
+    font-weight: 400;
+
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   SIDEBAR SECTION
+===================================================== */
+
+.sidebar-section {
+
+    padding: 22px 14px 8px;
+
+    color: #667085;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   SIDEBAR MENU
+===================================================== */
+
+.sidebar-menu {
+
+    list-style: none;
+
+    padding: 0 12px;
+
+    margin: 0;
+}
+
+.sidebar-menu li {
+
+    margin-bottom: 4px;
+}
+
+.sidebar-menu a {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    color: #aab3c2;
+
+    text-decoration: none;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+.sidebar-menu a i {
+
+    width: 18px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.sidebar-menu a:hover {
+
+    background: rgba(255,255,255,0.06);
+
+    color: #ffffff;
+
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   ACTIVE MENU
+===================================================== */
+
+.sidebar-menu a.active {
+
+    background: #14b8a6;
+
+    color: #ffffff;
+
+    box-shadow: 0 5px 15px rgba(20,184,166,0.18);
+}
+
+.sidebar-menu a.active i {
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   MAIN AREA
+===================================================== */
+
+.hospital-main {
+
+    margin-left: 245px;
+
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.hospital-topbar {
+
+    height: 72px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e8ecf1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    padding: 0 30px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 900;
+}
+
+
+/* =====================================================
+   ADMIN PROFILE
+===================================================== */
+
+.admin-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.admin-avatar {
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 50%;
+
+    background: #e7f8f5;
+
+    color: #0f9f91;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 13px;
+}
+
+.admin-info strong {
+
+    display: block;
+
+    font-size: 11px;
+
+    color: #273142;
+
+    font-weight: 700;
+}
+
+.admin-info span {
+
+    display: block;
+
+    font-size: 9px;
+
+    color: #98a2b3;
+
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   MOBILE / TABLET
+===================================================== */
+
+@media (max-width: 991px) {
+
+    .hospital-sidebar {
+
+        width: 70px;
+    }
+
+    .hospital-main {
+
+        margin-left: 70px;
+    }
+
+    .logo-text,
+    .sidebar-section,
+    .sidebar-menu a span,
+    .admin-info {
+
+        display: none;
+    }
+
+    .hospital-logo {
+
+        justify-content: center;
+
+        padding: 0;
+    }
+
+    .logo-icon {
+
+        margin: 0;
+    }
+
+    .sidebar-menu {
+
+        padding: 0 10px;
+    }
+
+    .sidebar-menu a {
+
+        justify-content: center;
+
+        padding: 11px 8px;
+    }
+
+    .sidebar-menu a i {
+
+        margin: 0;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .hospital-topbar {
+
+        padding: 0 15px;
+
+        height: 65px;
+    }
+
+    .hospital-topbar {
+
+        justify-content: flex-end;
+    }
+
+    .admin-profile {
+
+        display: none;
+    }
+
+    .hospital-main {
+
+        margin-left: 70px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="hospital-sidebar">
+
+
+    <!-- =========================
+         LOGO
+    ========================== -->
+
+    <div class="hospital-logo">
+
+        <div class="logo-icon">
+
+            <i class="fas fa-heart-pulse"></i>
+
+        </div>
+
+
+        <div class="logo-text">
+
+            MediCare
+
+            <small>
+                Hospital Management
+            </small>
+
+        </div>
+
+    </div>
+
+
+    {% if request.user.is_staff %}
+
+
+    <!-- =========================
+         MAIN MENU
+    ========================== -->
+
+    <div class="sidebar-section">
+        Main Menu
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+
+        <!-- DASHBOARD -->
+
+        <li>
+
+            <a href="{% url 'home' %}"
+               class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+
+                <i class="fas fa-grid-2"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- DOCTORS -->
+
+        <li>
+
+            <a href="{% url 'view_doctor' %}"
+               class="{% if request.resolver_match.url_name == 'view_doctor' or request.resolver_match.url_name == 'add_doctor' or request.resolver_match.url_name == 'delete_doctor' %}active{% endif %}">
+
+                <i class="fas fa-user-doctor"></i>
+
+                <span>
+                    Doctors
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- PATIENTS -->
+
+        <li>
+
+            <a href="{% url 'view_patient' %}"
+               class="{% if request.resolver_match.url_name == 'view_patient' or request.resolver_match.url_name == 'add_patient' or request.resolver_match.url_name == 'delete_patient' %}active{% endif %}">
+
+                <i class="fas fa-hospital-user"></i>
+
+                <span>
+                    Patients
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- APPOINTMENTS -->
+
+        <li>
+
+            <a href="{% url 'view_appointment' %}"
+               class="{% if request.resolver_match.url_name == 'view_appointment' or request.resolver_match.url_name == 'add_appointment' or request.resolver_match.url_name == 'delete_appointment' %}active{% endif %}">
+
+                <i class="fas fa-calendar-check"></i>
+
+                <span>
+                    Appointments
+                </span>
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+
+    <!-- =========================
+         MANAGEMENT
+    ========================== -->
+
+    <div class="sidebar-section">
+        Management
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+
+        <!-- ADD DOCTOR -->
+
+        <li>
+
+            <a href="{% url 'add_doctor' %}"
+               class="{% if request.resolver_match.url_name == 'add_doctor' %}active{% endif %}">
+
+                <i class="fas fa-user-plus"></i>
+
+                <span>
+                    Add Doctor
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- ADD PATIENT -->
+
+        <li>
+
+            <a href="{% url 'add_patient' %}"
+               class="{% if request.resolver_match.url_name == 'add_patient' %}active{% endif %}">
+
+                <i class="fas fa-user-plus"></i>
+
+                <span>
+                    Add Patient
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- ADD APPOINTMENT -->
+
+        <li>
+
+            <a href="{% url 'add_appointment' %}"
+               class="{% if request.resolver_match.url_name == 'add_appointment' %}active{% endif %}">
+
+                <i class="fas fa-calendar-plus"></i>
+
+                <span>
+                    Add Appointment
+                </span>
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+
+    <!-- =========================
+         ACCOUNT
+    ========================== -->
+
+    <div class="sidebar-section">
+        Account
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+
+        <!-- LOGOUT -->
+
+        <li>
+
+            <a href="{% url 'logout' %}">
+
+                <i class="fas fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+
+    {% else %}
+
+
+    <!-- =========================
+         PUBLIC NAVIGATION
+    ========================== -->
+
+    <div class="sidebar-section">
+        Navigation
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+
+        <!-- HOME -->
+
+        <li>
+
+            <a href="{% url 'login' %}"
+               class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">
+
+                <i class="fas fa-house"></i>
+
+                <span>
+                    Home
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- ABOUT -->
+
+        <li>
+
+            <a href="{% url 'about' %}"
+               class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+
+                <i class="fas fa-circle-info"></i>
+
+                <span>
+                    About
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- CONTACT -->
+
+        <li>
+
+            <a href="{% url 'contact' %}"
+               class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+
+                <i class="fas fa-phone"></i>
+
+                <span>
+                    Contact
+                </span>
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+
+    {% endif %}
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="hospital-main">
+
+
+    <!-- =========================
+         TOPBAR
+    ========================== -->
+
+    <header class="hospital-topbar">
+
+
+        <!--
+            Search removed
+            Notification bell removed
+        -->
+
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar">
+
+                <i class="fas fa-user"></i>
+
+            </div>
+
+
+            <div class="admin-info">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <span>
+                    Hospital Admin
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </header>
+
+
+    <!-- =========================
+         PAGE CONTENT
+    ========================== -->
+
+    {% block body %}
+
+    {% endblock %}
+
+
+</div>
+
+
+</body>
+
+</html>
