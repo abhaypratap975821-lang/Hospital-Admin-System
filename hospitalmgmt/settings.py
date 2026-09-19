@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-2w+3ijy07abcc^!-b*ftrft(bun*$eq6yj#l--=&uln@-jm4fu
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "hospital-admin-system-3.onrender.com",
+    "hospital-admin-system-5.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
@@ -137,5 +137,5 @@ MAILERS = {
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://hospital-admin-system-3.onrender.com",
+    "https://hospital-admin-system-5.onrender.com",
 ]
